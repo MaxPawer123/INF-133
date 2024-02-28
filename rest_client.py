@@ -16,4 +16,7 @@ nuevo_estudiante = {
 post_response = requests.request(method="POST", 
                                     url=ruta_post, 
                                     json=nuevo_estudiante)
-print(post_response.text)
+print(post_response.text)    
+
+
+
