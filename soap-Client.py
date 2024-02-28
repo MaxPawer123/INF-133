@@ -1,12 +1,16 @@
-from zeep import Client
+from zeep import Client 
 
-# Crear un cliente para el servicio web SOAP
-client = Client('http://ejemplo.com/servicio?wsdl')
-
-# Llamar a un método del servicio
-result = client.service.Saludar(nombre="Tatiana")
-
-# Hacer algo con el resultado
+client =Client(
+    "http://localhost:8000/"
+)
+# peticion o requests
+result = client.service.Saludar("David")
+result2 = client.service.Sumar(1,2)
+result3 = client.service.EsPalindromo('A luna ese anula')
 print(result)
+print(result2)
+print(result3)
+
+
 
 
