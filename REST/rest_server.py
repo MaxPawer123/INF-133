@@ -41,6 +41,7 @@ estudiantes = [
 ]
 
 class RESTRequestHandler(BaseHTTPRequestHandler):
+    #Modificar algo
     def do_GET(self):
             if self.path == '/lista_estudiantes':
                 self.send_response(200)
@@ -77,17 +78,21 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"Error": "Ruta no existente"}).encode('utf-8'))
+                self.wfile.write(json.dumps({"Error": "Ruta no existente"}).encode('utf-8'))# todo convetir en json
+            #Es para reconocer los uft-8 con todos los caracteres
 
-            
+ 
+       #Es publicar algo jalar      
     def do_POST(self):
-        if self.path == '/agrega_estudiante':
-            content_length = int(self.headers['Content-Length'])
+        if self.path == '/agrega_estudiantes':
+            content_length = int(self.headers['Content-Length']) #j/alar el dato del contenido json que no esten enviando
+            #Desde la logita de programacion 
             post_data = self.rfile.read(content_length)
             post_data = json.loads(post_data.decode('utf-8'))
-            post_data['id'] = len(estudiantes) + 1
+            post_data['id'] = len(estudiantes) + 1  # es un longitud de estudiantes
             estudiantes.append(post_data)
-            self.send_response(201)
+            #200 crea un objeto
+            self.send_response(201) #Se acercado algo se modificado el servidor
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps(estudiantes).encode('utf-8'))
@@ -114,7 +119,8 @@ if __name__ == "__main__":
     run_server()
 
 
-
+# en primer parcial es dar o actulizar el http
+#Eliminar estudiante es eliminar estudiante
 
 
 
