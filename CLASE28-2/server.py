@@ -119,7 +119,7 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"Error": "Ruta no existente"}).encode("utf-8"))
-
+     
 
     
     def do_GET(self):
