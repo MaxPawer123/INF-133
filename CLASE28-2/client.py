@@ -6,11 +6,7 @@ url = "http://localhost:8000/"
 
 ### Inciso a
 
-# # GET para mostrar todas las carreras
-ruta_get_carreras = url + "/carreras/"
-get_response_carreras = requests.request(method="GET", url=ruta_get_carreras)
 
-print(get_response_carreras.text)
 
 ### Inciso b
 
@@ -40,9 +36,24 @@ nuevo_estudiante = {
 }
 post_response_eco = requests.request(method="POST", url=ruta_post_eco, json=nuevo_estudiante)
 #print(post_response_eco.text)
-
+"""
 # # GET obtener a todos los estudiantes por la ruta /estudiantes
 ruta_get = url + "estudiantes"
 get_response = requests.request(method="GET", url=ruta_get)
 
+print(get_response.text)"""
+
+#GET 
+# GET 
+"""ruta_get = url + "estudiantes?nombre=Pedrito"
+get_response = requests.request(method="GET", url=ruta_get)
 print(get_response.text)
+"""
+rut_get=url + "estudiantes?apellido=Mamani"
+get_response_apellido=requests.request(method="GET", url=rut_get)
+print(get_response_apellido.text)
+
+# # GETBUE=SQUEDA POR CARRERAS
+ruta_get = url + "estudiantes?carrera=Economia"
+get_response_carreras = requests.request(method="GET", url=rut_get)
+print(get_response_carreras.text)
