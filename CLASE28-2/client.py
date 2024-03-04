@@ -1,4 +1,5 @@
 import requests
+#DAVID MAMANI VALERIANO
 
 # Consultando a un servidor RESTful
 url = "http://localhost:8000/"
