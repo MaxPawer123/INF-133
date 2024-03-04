@@ -49,35 +49,14 @@ carreras = ["Ingeniería Informática", "Seguridad de la Informacion","Economia"
 
 class RESTRequestHandler(BaseHTTPRequestHandler):
     #Agrega una ruta para mostrar todas las carreras
-
-
     def do_POST(self):
-        if self.path == "/estudiantes":
+        estudiantes.append(pos_data)
+        self.send_response(201)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps({"Error": "Ruta no existente"}).encode("utf-8"))
+        elif self.path.startswith('/economia/'):
             content_length = int(self.headers["Content-Length"])
-            post_data = self.rfile.read(content_length)
-            post_data = json.loads(post_data.decode("utf-8"))
-            post_data["id"] = len(estudiantes) + 1
-            estudiantes.append(post_data)
-            self.send_response(201)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps(estudiantes).encode("utf-8"))
-      
-        elif self.path.startswith("/estudiantes/incisoC"):
-        # Agregar dos estudiantes de "Economía"
-                for _ in range(2):
-                    new_student = {
-                        "nombre": f"Estudiante{_ + 1}",
-                        "carrera": "Economía",
-                        # Otros campos según tu estructura de datos
-                    }
-                    new_student["id"] = len(estudiantes) + 1
-                    estudiantes.append(new_student)
-
-                self.send_response(201)
-                self.send_header("Content-type", "application/json")
-                self.end_headers()
-                self.wfile.write(json.dumps(estudiantes).encode("utf-8"))
 
         else:
             self.send_response(404)
@@ -174,8 +153,9 @@ if __name__ == "__main__":
     run_server()
 
 
-    """
 
+
+"""
 def do_POST(self):
         if self.path == "/estudiantes":
             content_length = int(self.headers["Content-Length"])
