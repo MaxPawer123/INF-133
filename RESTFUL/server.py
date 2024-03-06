@@ -87,13 +87,13 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
         query_params = parse_qs(parsed_path.query)
 
         if parsed_path.path == "/estudiantes":
-            if "nombre" in query_params:
-                nombre = query_params["nombre"][0]
+            if "apellido" in query_params:
+                apellido = query_params["apellido"][0]
                 estudiantes_filtrados = [
                     estudiante
-                    for estudiante in estudiantes
-                    if estudiante["nombre"] == nombre:
-        ]
+                        for estudiante in estudiantes
+                        if estudiante["apellido"] == apellido
+                ]
                 if estudiantes_filtrados != []:
                     self.response_handler(200, estudiantes_filtrados)
                 else:
@@ -113,45 +113,7 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
             self.response_handler(404, {"Error": "Ruta no existente"})
 
     
-    
-    """ def do_GETPRUEBA(self):
-        parsed_path=urlparse(self.path)
-        query_params=parse_qs(parsed_path.query)   
-        if  parsed_path.path   == "/estudiantes":
-            self.respuesta_hadler(self,estudiante)
-        elif self.path.startswith("/estudiantes/"):
-            id = int(self.path.split("/")[-1])
-            estudiante = next(
-                (estudiante for estudiante in estudiantes if estudiante["id"] == id),
-                None,
-            )
-            if estudiante:
-                self.respuesta_hadler(self,estudiante)         
-        elif self.path.startswith("/carreras/"):
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            carreras = list(set(estudiante["carrera"] for estudiante in estudiantes))            
-            self.wfile.write(json.dumps({"estudiantes_totales": carreras}).encode('utf-8'))
-        elif self.path.startswith("/economia/"):
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            carrera_eco = list(estudiante for estudiante in estudiantes if estudiante['carrera'] == "Economia")            
-            self.wfile.write(json.dumps({"estudiantes de econmia": carrera_eco}).encode('utf-8'))
-        else:
-            self.send_response(404)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"Error": "Ruta no existente"}).encode("utf-8"))
-            
-            
-                    if estudiante["apellido"]== apellido:
-                    if estudiante{"apellido"} and ["apelldo"]== "Jose Mamani"
-         
-            """
-            
-            
+
 
     def do_POST(self):
         if self.path == "/estudiantes":

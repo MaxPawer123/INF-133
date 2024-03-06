@@ -49,11 +49,11 @@ print(get_response.text)"""
 get_response = requests.request(method="GET", url=ruta_get)
 print(get_response.text)
 """
-rut_get=url + "estudiantes?apellido=Mamani"
-get_response_apellido=requests.request(method="GET", url=rut_get)
-print(get_response_apellido.text)
+rut_get= url + "estudiantes?apellido=Mamani"
+get_response=requests.request(method="GET", url=rut_get)
+print(get_response.text)
 
-# # GETBUE=SQUEDA POR CARRERAS
+"""# # GETBUE=SQUEDA POR CARRERAS
 ruta_get = url + "estudiantes?carrera=Economia"
 get_response_carreras = requests.request(method="GET", url=rut_get)
-print(get_response_carreras.text)
+print(get_response_carreras.text)"""
