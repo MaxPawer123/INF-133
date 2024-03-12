@@ -1,6 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
-from graphene import ObjectType, String, Int, List, Schema, Field, Mutation
+from graphene import ObjectType, String, Int, List, Schema, Field
 
 
 class Estudiante(ObjectType):
@@ -12,11 +12,17 @@ class Estudiante(ObjectType):
 
 class Query(ObjectType):
     estudiantes = List(Estudiante)
-    estudiante_por_id = Field(Estudiante, id=Int())
+    estudiante_por_nombre_apellido = Field(Estudiante, nombre=String(), apellido=String())
 
     def resolve_estudiante_por_id(root, info, id):
         for estudiante in estudiantes:
             if estudiante.id == id:
+                return estudiante
+        return None
+
+    def resolve_estudiante_por_nombre_apellido(root, info, nombre,apellido):
+        for estudiante in estudiantes:
+            if estudiante.nombre == nombre and estudiante.apellido and apellido:
                 return estudiante
         return None
 
@@ -51,35 +57,16 @@ class DeleteEstudiante(Mutation):
                 estudiantes.pop(i)
                 return DeleteEstudiante(estudiante=estudiante)
         return None
-    
-class ActulizarEstudiante(Mutation):
-    class Arguments:
-        id = Int()
-#    Estudiante(id=2, nombre= "Jose" , apellido= "Lopez", carrera="Arquitectura"),
-    estudiante = Field(Estudiante)
-
-    def mutate(root, info,id):
-        for i, estudiante in enumerate(estudiantes):
-            if estudiante.id == id:
-                estudiante.carrera="Antropología"
-                return ActulizarEstudiante(estudiante=estudiante)
-        return None
 
 class Mutations(ObjectType):
     crear_estudiante = CrearEstudiante.Field()
     delete_estudiante = DeleteEstudiante.Field()
 
 estudiantes = [
-   
-   Estudiante(
+    Estudiante(
         id=1, nombre="Pedrito", apellido="García", carrera="Ingeniería de Sistemas"
     ),
     Estudiante(id=2, nombre="Jose", apellido="Lopez", carrera="Arquitectura"),
-    
-    Estudiante(
-        id=3, nombre="David", apellido="García", carrera="Ingeniería de Sistemas"
-    ),
-    Estudiante(id=4, nombre="Maria", apellido="Lopez", carrera="Medicina"),
 ]
 
 schema = Schema(query=Query, mutation=Mutations)

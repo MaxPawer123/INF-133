@@ -1,0 +1,19 @@
+--CLASE 
+--una api restful no es esdacruel 
+graphuel=bastante usuario para recuperar consectos
+
+continuar con graphuel
+
+REst vs Graphql
+
+Mutaciones metodos dentro del servidor para recibir 
+aplicar los servidores de 
+--Kiss: simbol de query
+--Dry: 
+
+
+
+
+
+
+
