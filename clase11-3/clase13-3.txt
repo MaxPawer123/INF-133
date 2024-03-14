@@ -1,0 +1,40 @@
+
+
+YAGNI (You Arent ) =Para ordernar ordernar un sitema de comandas
+SOLID(Cinco principios diseño orientado a objetos)
+Buscan construir softwar mas mantenible escalable y facil de enteder
+
+--- S- single Responsibility principios que clase tiene el (SRP)
+como sabemos que no cumple 
+cada clase debe tener una sola Responsibilidad
+-- O- Open Closed Principle(OCP)
+Tiene que ser principios de Abrir Cerrado
+Capaz de extender comportamiento sin 
+
+- L Liskov Subtitution 
+I Interface Segregation Principle(ISP)
+
+Haz Interface que sean 
+
+LOS PRINCIPIO SE APLICA A TODOS SI BIEN HACEMOS EN BD
+
+D- DEPENDECY INVESION Principle (DIP)
+
+Abstraer es heredar o descripbir o algo en los mundos de los datos 
+
+
+PATRONES DE DISEÑO 
+Son patrones que se derivan de experiencia. 
+
+---CATALOGO DE PATRONES DE DISEÑO
+Patrones creacionales o estructurale, 
+Aquel que pertenece 
+
+--PATRON DE SIGLETON 
+Solo hay un servicis es un singler que proporciona en un instacia 
+Responsibilidad unica 
+
+MVC (Es dividir las instacia y modelos y constroladores)
+
+
+mi servidor 

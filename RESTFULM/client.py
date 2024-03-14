@@ -20,8 +20,3 @@ print(post_response.text)
 ruta_get = url + "estudiantes?nombre=Pedrito"
 get_response = requests.request(method="GET", url=ruta_get)
 print(get_response.text)
-print(get_response.text)
-
-
-
-
