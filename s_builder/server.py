@@ -28,21 +28,6 @@ class PizzaBuilder:
     def get_pizza(self):
         return self.pizza
 
-class PizzaService:
-    def build_pizza(self, data):
-        tamaño = data.get('tamaño', None)
-        masa = data.get('masa', None)
-        toppings = data.get('toppings', [])
-        builder = PizzaBuilder()
-        pizzeria = Pizzeria(builder)
-        pizza = pizzeria.create_pizza(tamaño, masa, toppings)
-
-        response = {
-            'tamaño': pizza.tamaño,
-            'masa': pizza.masa,
-            'toppings': pizza.toppings
-        }
-        return response
 # Director: Pizzería
 class Pizzeria:
     def __init__(self, builder):
@@ -55,29 +40,54 @@ class Pizzeria:
             self.builder.add_topping(topping)
         return self.builder.get_pizza()
 
-class HTTPResponseHandler:
+# Aplicando el principio de responsabilidad única (S de SOLID)
+class PizzaService:
+    def __init__(self):
+        self.builder = PizzaBuilder()
+        self.pizzeria = Pizzeria(self.builder)
+
+    def handle_post_request(self, post_data):
+        tamaño = post_data.get('tamaño', None)
+        masa = post_data.get('masa', None)
+        toppings = post_data.get('toppings', [])
+
+        pizza = self.pizzeria.create_pizza(tamaño, masa, toppings)
+
+        return {
+            'tamaño': pizza.tamaño,
+            'masa': pizza.masa,
+            'toppings': pizza.toppings
+        }
+
+class HTTPDataHandler:
     @staticmethod
-    def handler_response(handler,status, data):
+    def handle_response(handler, status, data):
         handler.send_response(status)
         handler.send_header("Content-type", "application/json")
         handler.end_headers()
         handler.wfile.write(json.dumps(data).encode("utf-8"))
-
+    @staticmethod
+    def handle_reader(handler):
+        content_length = int(handler.headers['Content-Length'])
+        post_data = handler.rfile.read(content_length)
+        return json.loads(post_data.decode('utf-8'))
+    
 # Manejador de solicitudes HTTP
 class PizzaHandler(BaseHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        controller = PizzaService()
+        super().__init__(*args, **kwargs)
+        
     def do_POST(self):
         if self.path == '/pizza':
-            data = self.read_data()
-            response = PizzaService.build_pizza(self, data)
-            HTTPResponseHandler.handler_response(self,200,response)
+            
+            data = HTTPDataHandler.handle_reader(self)
+            response_data = self.controller.handle_post_request(data)
+            
+            HTTPDataHandler.handle_response(self, 200, response_data)
         else:
-            HTTPResponseHandler.handler_response(self,200,{"Error"})
+            HTTPDataHandler.handle_response(self, 404, {"Error": "Ruta no existente"})
 
-    def read_data(self):
-        content_length = int(self.headers["Content-Length"])
-        data = self.rfile.read(content_length)
-        data = json.loads(data.decode("utf-8"))
-        return data
 
 def run(server_class=HTTPServer, handler_class=PizzaHandler, port=8000):
     server_address = ('', port)
@@ -87,5 +97,3 @@ def run(server_class=HTTPServer, handler_class=PizzaHandler, port=8000):
 
 if __name__ == '__main__':
     run()
-    
-    

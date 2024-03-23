@@ -1,0 +1,68 @@
+La MONOLITICA 
+Una aplicacion desarrollado y desplegado unica o unidad
+PRO:
+
+OBJETIVO hacer un servcicio de APIA
+TODO hacido tipo MONOLITICA
+
+ARQUITECTURA MVC 
+ES COMO CONSTRUIR UN OBRA
+MODELO: es como es un concierto es 
+
+PRO: Modularidad y componentes independientes, cambios sin impacto en otras áreas, adición o modificación de componentes
+CONTRA: Complejidad inicial,dependencia entre componentes,mantenimiento de consistencia
+
+
+Es para separar los servidore del MVC
+detras de los controladores viene los modelos 
+
+MICROSERVICIOS
+Hay un concepto de autotenticacion si o si necesitas con APIA
+PRO: Flexibilidad, escalabilidad, implementación rápida de nuevas características
+CONTRA: Complejidad en la gestión de la comunicación entre servicios y el monitoreo de la infraestructura distribuida.
+
+Ser BACKEND es mucha responsable 
+
+RAVIOLI ARQUITECTURA
+Entra tu peticion y llega el tokenn
+
+Serverless: Solo nos comprar las solicitudes 
+Hay upia es el que luz de emergencia 
+
+PRO: Escalado automático según la demanda, reducción de costos,
+enfoque en escribir código en lugar de administrar servidores.
+
+CONTRA: No adecuado para aplicaciones con requisitos de rendimiento muy específicos o que requieran un control más granular sobre la infraestructura.
+
+Son servicio 
+ARQUITECTURA es laptop de  32Bits, 64bits
+RISOTTO es 
+RISO ES ARROZ EN INTALIANO
+
+
+CRUD
+C (Create): Es crear de nuevo elementos POST
+R (Read): es leer es GET 
+U (Actulizar): Es Actulizar PUT
+D (Delete): Es eliminar Delete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
