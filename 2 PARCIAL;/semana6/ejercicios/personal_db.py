@@ -169,7 +169,8 @@ cursor.execute(
     FROM SALARIOS
     WHERE id = 2 
     """
-)
+)   
+
 
 print("--INSERTAR ")
 
