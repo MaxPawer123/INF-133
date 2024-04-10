@@ -64,7 +64,7 @@ class DeliveryService:
         return delivery_vehicle
 
     def list_vehicles(self):
-        return {index:  	vehicle.__dict__ for index, vehicle in vehicles.items()}
+        return {index: vehicle.__dict__ for index, vehicle in vehicles.items()}
 
     def update_vehicle(self, vehicle_id, data):
         if vehicle_id in vehicles:

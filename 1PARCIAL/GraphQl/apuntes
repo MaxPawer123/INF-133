@@ -1,0 +1,241 @@
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import json
+from graphene import ObjectType, String, Int, List, Schema, Field, Mutation
+
+
+class Estudiante(ObjectType):
+    id = Int()
+    nombre = String()
+    apellido = String()
+    carrera = String()
+
+
+class Query(ObjectType):
+    estudiantes = List(Estudiante)
+    estudiante_por_id = Field(Estudiante, id=Int())
+
+    def resolve_estudiantes(root, info):
+        return estudiantes
+    
+    def resolve_estudiante_por_id(root, info, id):
+        for estudiante in estudiantes:
+            if estudiante.id == id:
+                return estudiante
+        return None
+
+class CrearEstudiante(Mutation):
+    class Arguments:
+        nombre = String()
+        apellido = String()
+        carrera = String()
+
+    estudiante = Field(Estudiante)
+
+    def mutate(root, info, nombre, apellido, carrera):
+        nuevo_estudiante = Estudiante(
+            id=len(estudiantes) + 1, 
+            nombre=nombre, 
+            apellido=apellido, 
+            carrera=carrera
+        )
+        estudiantes.append(nuevo_estudiante)
+
+        return CrearEstudiante(estudiante=nuevo_estudiante)
+
+class DeleteEstudiante(Mutation):
+    class Arguments:
+        id = Int()
+
+    estudiante = Field(Estudiante)
+
+    def mutate(root, info, id):
+        for i, estudiante in enumerate(estudiantes):
+            if estudiante.id == id:
+                estudiantes.pop(i)
+                return DeleteEstudiante(estudiante=estudiante)
+        return None
+
+class Mutations(ObjectType):
+    crear_estudiante = CrearEstudiante.Field()
+    delete_estudiante = DeleteEstudiante.Field()
+
+estudiantes = [
+    Estudiante(
+        id=1, nombre="Pedrito", apellido="García", carrera="Ingeniería de Sistemas"
+    ),
+    Estudiante(id=2, nombre="Jose", apellido="Lopez", carrera="Arquitectura"),
+]
+
+schema = Schema(query=Query, mutation=Mutations)
+
+
+class GraphQLRequestHandler(BaseHTTPRequestHandler):
+    def response_handler(self, status, data):
+        self.send_response(status)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps(data).encode("utf-8"))
+
+    def do_POST(self):
+        if self.path == "/graphql":
+            content_length = int(self.headers["Content-Length"])
+            data = self.rfile.read(content_length)
+            data = json.loads(data.decode("utf-8"))
+            print(data)
+            result = schema.execute(data["query"])
+            self.response_handler(200, result.data)
+        else:
+            self.response_handler(404, {"Error": "Ruta no existente"})
+
+
+def run_server(port=8000):
+    try:
+        server_address = ("", port)
+        httpd = HTTPServer(server_address, GraphQLRequestHandler)
+        print(f"Iniciando servidor web en http://localhost:{port}/")
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("Apagando servidor web")
+        httpd.socket.close()
+
+
+if __name__ == "__main__":
+    run_server()
+    
+-----------------------------
+import requests
+# Definir la URL del servidor GraphQL
+url = 'http://localhost:8000/graphql'
+
+# Definir la consulta GraphQL simple
+query_lista = """
+{
+        estudiantes{
+            id
+            nombre
+            carrera
+        }
+    }
+"""
+# Solicitud POST al servidor GraphQL
+response = requests.post(url, json={'query': query_lista})
+print(response.text)
+
+# Definir la consulta GraphQL con parametros
+query = """
+    {
+        estudiantePorId(id: 2){
+            nombre
+        }
+    }
+"""
+
+# Solicitud POST al servidor GraphQL
+response2 = requests.post(url, json={'query': query})
+print(response2.text)
+
+#BUSCAR EL NOMBRE Y APELLido
+#En la respuesta no tiene que ser el mismo atributo
+query_nombreA = """
+    {
+        estudiantePorNombreApellido( nombre: "Jose",apellido: "Lopez"){
+            id
+        }
+    }
+"""
+
+# Solicitud POST al servidor GraphQL
+response3 = requests.post(url, json={'query': query_nombreA})
+print(response3.text)
+
+
+#BUSCAR EL POR CARRERA
+#En la respuesta no tiene que ser el mismo atributo
+query_carrera = """
+    {
+        estudiantePorCarrera( carrera:"Arquitectura"){
+            id
+        }
+    }
+"""
+
+# Solicitud POST al servidor GraphQL
+response4 = requests.post(url, json={'query': query_carrera})
+print(response4.text)
+
+
+# Definir la consulta GraphQL para crear nuevo estudiante
+
+
+# Definir la consulta GraphQL para crear nuevo estudiante
+query_crear_Aquitectura = """
+mutation {
+        crearEstudiante(nombre: "Angel", apellido: "Gomez",carrera: "Arquitectura") {
+            estudiante {
+                id
+                nombre
+                apellido
+                carrera
+            }
+        }
+    }
+"""
+
+response_mutation2 = requests.post(url, json={'query': query_crear_Aquitectura})
+print(response_mutation2.text)
+
+
+# Lista de todos los estudiantes
+response = requests.post(url, json={'query': query_lista})
+print(response.text)
+
+# Definir la consulta GraphQL para eliminar un estudiante
+query_eliminar = """
+mutation {
+        deleteEstudiante(id: 3) {
+            estudiante {
+                id
+                nombre
+                apellido
+                carrera
+            }
+        }
+    }
+"""
+
+response_mutation3 = requests.post(url, json={'query': query_eliminar})
+print(response_mutation3.text)
+
+# Lista de todos los estudiantes
+response = requests.post(url, json={'query': query_lista})
+print(response.text)
+
+
+
+
+
+"""
+query_crear = """
+"""mutation {
+        crearEstudiante(nombre: "Angel", apellido: "Gomez", carrera: "Biologia") {
+            estudiante {
+                id
+                nombre
+                apellido
+                carrera
+            }
+        }
+    }"""
+"""
+
+response_mutation1 = requests.post(url, json={'query': query_crear})
+print(response_mutation1.text)
+
+"""
+
+
+
+
+
+
+

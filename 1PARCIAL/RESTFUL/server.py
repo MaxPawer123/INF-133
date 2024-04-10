@@ -125,7 +125,7 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
             estudiante = self.find_student(id)
             data = self.read_data()
             if estudiante:
-                estudiante.update(data)^
+                estudiante.update(data)
                 self.response_handler(200, [estudiantes])
             else:
                 self.response_handler(404, {"Error": "Estudiante no encontrado"})

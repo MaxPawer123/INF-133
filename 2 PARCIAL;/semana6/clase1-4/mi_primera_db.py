@@ -174,9 +174,14 @@ cursor = conn.execute(
 for row in cursor:
     print(row)
     
+
+
 # MATRICULACION:
 # (1, 1, 1, '2024-01-15')
 # (2, 2, 2, '2024-01-30')
 
+
 # Cerrar conexión
 conn.close()
+
+conn.commit()
