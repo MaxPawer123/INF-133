@@ -1,32 +1,35 @@
 import sqlite3
-conn = sqlite3.connect('personal.db')
+
+conn = sqlite3.connect('personal1.db')
 cursor = conn.cursor()
 
-try:
-    conn.execute(
-        '''CREATE TABLE DEPARTAMENTOS (
-            id INTEGER PRIMARY KEY,
-            nombre TEXT NOT NULL,
-            fecha_creacion TEXT NOT NULL
-        )'''
-    )
+# Crear tabla DEPARTAMENTOS
+try: 
+    conn.execute("""CREATE TABLE DEPARTAMENTOS (
+                    id INTEGER PRIMARY KEY,
+                    nombre TEXT NOT NULL,
+                    fecha_creacion TEXT NOT NULL);
+                 """
+                )
 except sqlite3.OperationalError:
-    print("La tabla Departamentos ya existe")
+    print("La tabla MESAS ya existe")
 
+# Crear tabla CARGOS
 try:
-    cursor.execute('''CREATE TABLE CARGOS (
+    conn.execute("""CREATE TABLE CARGOS (
                     id INTEGER PRIMARY KEY,
                     nombre TEXT NOT NULL,
                     nivel TEXT NOT NULL,
-                    fecha_creacion TEXT NOT NULL
-                )'''
+                    fecha_creacion TEXT NOT NULL);
+                """
                 )
 except sqlite3.OperationalError:
-    print("La tabla de cargos ya existe")
+    print("La tabla MESAS ya existe")
 
-try:
-    
-    cursor.execute('''CREATE TABLE IF NOT EXISTS EMPLEADOS (
+# Crear tabla EMPLEADOS
+try: 
+    conn.execute("""
+                   CREATE TABLE  EMPLEADOS (
                     id INTEGER PRIMARY KEY,
                     nombres TEXT NOT NULL,
                     apellido_paterno TEXT NOT NULL,
@@ -36,25 +39,27 @@ try:
                     cargo_id INTEGER NOT NULL,
                     fecha_creacion TEXT NOT NULL,
                     FOREIGN KEY (departamento_id) REFERENCES DEPARTAMENTOS(id),
-                    FOREIGN KEY (cargo_id) REFERENCES CARGOS(id)
-                )'''
-                )
+                    FOREIGN KEY (cargo_id) REFERENCES CARGOS(id));
+                """)
 except sqlite3.OperationalError:
-    print("la tabla enpleados ya existe")
+    print("La tabla MESAS ya existe")
 
-try:
-    cursor.execute('''CREATE TABLE SALARIOS (
-                    id INTEGER PRIMARY KEY,
-                    empleado_id INTEGER NOT NULL,
-                    salario REAL NOT NULL,
-                    fecha_inicio DATE NOT NULL,
-                    fecha_fin DATE NOT NULL,
-                    fecha_creacion TEXT NOT NULL,
-                    FOREIGN KEY (empleado_id) REFERENCES EMPLEADOS(id)
-                )'''
-                )
+
+# Crear tabla SALARIOS
+try: 
+    conn.execute("""CREATE TABLE  SALARIOS (
+                        id INTEGER PRIMARY KEY,
+                        empleado_id INTEGER NOT NULL,
+                        salario REAL NOT NULL,
+                        fecha_inicio DATE NOT NULL,
+                        fecha_fin DATE NOT NULL,
+                        fecha_creacion TEXT NOT NULL,
+                        FOREIGN KEY (empleado_id) REFERENCES EMPLEADOS(id));
+                    """  )
+
 except sqlite3.OperationalError:
-    print("La tabla de salarios ya existe")
+    print("La tabla MESAS ya existe")
+
 
 
 # Insertar datos de departamentos
@@ -88,7 +93,6 @@ conn.execute(
     
     """
 )
-
 # Lista los empleados y sus salarios
 cursor.execute('''SELECT e.nombres, e.apellido_paterno, e.apellido_materno, s.salario
                   FROM EMPLEADOS e
@@ -119,88 +123,16 @@ cursor.execute(
     INNER JOIN SALARIOS s ON e.id = s.empleado_id
     """)
 
-print("------ Empleados, departamento y cargo  ------")
+print("--Empleados, departamento y cargo ")
 for row in cursor:
     print(row)
 
-# Actualizar el precio del plato id 2
-conn.execute(
-    """
-    UPDATE EMPLEADOS
-    SET cargo_id = 3
-    WHERE id = 2
-    """
-)
 
-conn.execute(
-    """
-    UPDATE SALARIOS
-    SET salario = 3600
-    WHERE empleado_id = 2
-    """
-)
 
-cursor.execute(
-    """
-    SELECT e.*, d.nombre, c.nombre, s.salario
-    FROM EMPLEADOS e
-    INNER JOIN DEPARTAMENTOS d ON e.departamento_id = d.id
-    INNER JOIN CARGOS c ON e.cargo_id = c.id
-    INNER JOIN SALARIOS s ON e.id = s.empleado_id
-    """)
-
-print("------ Empleados, departamento y cargo  ------")
+print("-----EMPLEADOS ------")
 for row in cursor:
     print(row)
 
-print("----------------------------")
-
-
-cursor.execute(
-    """ 
-    DELETE 
-    FROM EMPLEADOS
-    WHERE id = 2 
-    """
-)
-cursor.execute(
-    """ 
-    DELETE 
-    FROM SALARIOS
-    WHERE id = 2 
-    """
-)   
-
-
-print("--INSERTAR ")
-
-conn.execute(
-    """
-    INSERT INTO EMPLEADOS (nombres, apellido_paterno, apellido_materno, fecha_contratacion, departamento_id, cargo_id, fecha_creacion)
-    VALUES('Carlos', 'Sanchez', 'Rodriguez', '09-04-2024', 1, 3, '09-04-2024')
-    """
-)
-conn.execute(
-    """
-    INSERT INTO SALARIOS(empleado_id, salario, fecha_inicio, fecha_fin, fecha_creacion)
-    VALUES(2,3500,'05-05-2023','05-12-2024','05-05-2023')
-    
-    """
-)
-
-# Lista los empleados, el departamento en el que trabajan, el cargo que ocupan y el salario que ganan
-cursor.execute(
-    """
-    SELECT e.*, d.nombre, c.nombre, s.salario
-    FROM EMPLEADOS e
-    INNER JOIN DEPARTAMENTOS d ON e.departamento_id = d.id
-    INNER JOIN CARGOS c ON e.cargo_id = c.id
-    INNER JOIN SALARIOS s ON e.id = s.empleado_id
-    """)
-for row in cursor:
-    print(row)
-    
-    
 conn.commit()
 conn.close()
 
