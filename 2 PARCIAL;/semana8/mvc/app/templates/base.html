@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MVC</title>
+</head>
+<body>
+    <h1>MVC</h1>
+    <nav>
+        <!--HAcemos YIYAN-->
+        <a href="{{ url_for('user.registro') }}">Registrar Usuario</a> <!--almacena registros--> 
+        <a href="{{ url_for('user.usuarios') }}">Lista de Usuarios</a><!--almacena usuarios-->
+    </nav>
+    <div>
+        {% block content %}{% endblock %} <!--va a mutar en el YIYA-->
+    </div>
+</body>
+</html>
+

@@ -44,3 +44,5 @@ if response_contar.status_code == 200:
     print("Número de veces que aparece la vocal 'e':", resultado_contar)
 else:
     print("Error al conectar con el servidor (Contar):", response_contar.status_code)
+    
+    #MVC modelo control vista
