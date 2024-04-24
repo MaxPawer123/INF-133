@@ -8,12 +8,12 @@ from datetime import datetime
 
 # Un Blueprint es un objeto que agrupa rutas y vistas
 user_bp = Blueprint('user', __name__)
-
+#
 # Definimos las rutas "/" asociada a la funcion usuarios
 # que nos devuelve la vista de usuarios
 @user_bp.route('/')
 def usuarios():
-    # Obtenemos todos los usuarios
+    # Obtenemos todos los usuario0s
     users = User.get_all()
     # Llamamos a la vista de usuarios
     return user_view.usuarios(users)

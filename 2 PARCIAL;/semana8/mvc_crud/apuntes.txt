@@ -1,0 +1,19 @@
+
+la plantilla que mmuestra un resultado 
+
+que es una variable en jinja {{title}} al momento de rendirisar y resive una variable
+extends=hereda de que 
+hereda de los usuarios.html
+habro la clave de contenido
+
+{% for user inf users%}
+#iterea al las variable
+<li>{{user.nomre}}
+
+///El navegador es el cliente de los usuarios
+//toco el primero el modelo, 
+2 paso a las vista contruyo el html
+3 views
+//@user_bp.route("/users/<int:id>", methods=["POST"]) 
+//que es un funcion asociada a las funcion que le damos 
+// lo direccionamos a la funcion de jinja
