@@ -1,0 +1,37 @@
+
+///Routing =Enrutamiento
+
+Determinar los apis 
+{controlador}/{id}/{accion} #accion: get , delete
+{controlador} /{accion} #sin elemento unico 
+{controlador} #listar
+
+users/create
+users/1/delete
+
+//Route=Rutas
+
+// Sqlachemy 
+dc.session.add(self) /// el usuario se inserta a esos datos esto remplaza en Sqlachemy
+
+//API MVC 
+Modelo Vista:representa una base de datos, controlador
+// primero se contruye el modelo
+
+//////////////////////////////////
+cunado hacemos WEB APP
+//APP 
+--controlador
+--views
+--models
+--templates
+
+
+//////////////////////////////////
+cunado hacemos API
+//APP 
+--controlador
+--views
+--models
+--static
+///////////////////

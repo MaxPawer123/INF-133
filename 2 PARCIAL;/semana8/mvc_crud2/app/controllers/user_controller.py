@@ -2,7 +2,6 @@ from flask import Blueprint, request, redirect, url_for
 
 # Importamos la vista de usuarios
 from views import user_view
-from datetime import datetime
 
 # Importamos el modelo de usuario
 from models.user_model import User
@@ -54,15 +53,11 @@ def update_user(id):
         return "Usuario no encontrado", 404
     if request.method == "POST":
         # Obtenemos los datos del formulario
-         # Obtenemos los datos del formulario
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
-        email=request.form['email']
-        contraseña=request.form['contraseña']
-        fecha_nacimiento_str=request.form['fecha_nacimiento']
-        fecha_nacimiento = datetime.strptime(fecha_nacimiento_str, '%Y-%m-%d').date()
-  
-        # Creamos un nuevo usuario
+        # Actualizamos los datos del usuario
+        user.first_name = first_name
+        user.last_name = last_name
         # Guardamos los cambios
         user.update()
         return redirect(url_for("user.list_users"))
