@@ -35,3 +35,10 @@ cunado hacemos API
 --models
 --static
 ///////////////////
+
+
+POR QUE USAMOS JSON PARA QUE SEA 
+EN FOMATO JSON
+
+cuanto es verbos de http 
+son  3 que son : GET, PUT, DELETE

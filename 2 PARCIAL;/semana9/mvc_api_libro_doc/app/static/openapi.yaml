@@ -1,37 +1,37 @@
 openapi: 3.0.1
 info:
-  title: Zoológico API
+  title: Biblioteca API
   version: "1.0.0"
 paths:
-  /api/animals:
+  /api/libros:
     get:
-      summary: Obtiene la lista de todos los animales
+      summary: Obtiene la lista de todos los libros
       responses:
         200:
-          description: Lista de animales
+          description: Lista de libros
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Animal'
+                  $ref: '#/components/schemas/Libro'
     post:
-      summary: Crea un nuevo animal
+      summary: Crea un nuevo libro
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Animal'
+              $ref: '#/components/schemas/Libro'
       responses:
         201:
-          description: Animal creado
+          description: Libro creado
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Animal'
-  /api/animals/{id}:
+                $ref: '#/components/schemas/Libro'
+  /api/libros/{id}:
     get:
-      summary: Obtiene un animal específico por su ID
+      summary: Obtiene un libro específico por su ID
       parameters:
         - name: id
           in: path
@@ -40,15 +40,15 @@ paths:
             type: integer
       responses:
         200:
-          description: Detalles del animal
+          description: Detalles del libro
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Animal'
+                $ref: '#/components/schemas/Libro'
         404:
-          description: Animal no encontrado
+          description: Libro no encontrado
     put:
-      summary: Actualiza un animal existente por su ID
+      summary: Actualiza un libro existente por su ID
       parameters:
         - name: id
           in: path
@@ -59,18 +59,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Animal'
+              $ref: '#/components/schemas/Libro'
       responses:
         200:
-          description: Animal actualizado
+          description: Libro actualizado
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Animal'
+                $ref: '#/components/schemas/Libro'
         404:
-          description: Animal no encontrado
+          description: Libro no encontrado
     delete:
-      summary: Elimina un animal existente por su ID
+      summary: Elimina un libro existente por su ID
       parameters:
         - name: id
           in: path
@@ -78,25 +78,28 @@ paths:
           schema:
             type: integer
       responses:
-        204:    
-          description: Animal eliminado
+        204:
+          description: Libro eliminado
         404:
-          description: Animal no encontrado
+          description: Libro no encontrado
 components:
   schemas:
-    Animal:
+    Libro:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        name:
+        autor:
           type: string
-        species:
+        titulo:
           type: string
-        age:
-          type: integer
+        edicion:
+          type: string
+        disponibilidad:
+          type: boolean
       required:
-        - name
-        - species
-        - age
+        - autor
+        - titulo
+        - edicion
+        - disponibilidad

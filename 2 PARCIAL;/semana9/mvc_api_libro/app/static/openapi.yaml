@@ -78,7 +78,7 @@ paths:
           schema:
             type: integer
       responses:
-        204:    
+        204:
           description: Animal eliminado
         404:
           description: Animal no encontrado
