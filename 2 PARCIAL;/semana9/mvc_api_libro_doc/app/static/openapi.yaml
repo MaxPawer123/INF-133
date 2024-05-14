@@ -97,7 +97,7 @@ components:
         edicion:
           type: string
         disponibilidad:
-          type: boolean
+          type: string
       required:
         - autor
         - titulo

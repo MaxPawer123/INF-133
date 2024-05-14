@@ -11,7 +11,7 @@ class Libro(db.Model):
     titulo = db.Column(db.String(100), nullable=False)
     autor = db.Column(db.String(100), nullable=False)
     edicion = db.Column(db.String(100), nullable=False)
-    disponibilidad = db.Column(db.Boolean, default=True)
+    disponibilidad = db.Column(db.String(100), nullable=False)
     # Inicializa la clase `Animal`constructor de la clase Animal
     def __init__(self, titulo,autor, edicion, disponibilidad):
         self.titulo = titulo

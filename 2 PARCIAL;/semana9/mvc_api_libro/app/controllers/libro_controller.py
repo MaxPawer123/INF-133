@@ -9,8 +9,8 @@ libro_bp = Blueprint("libro", __name__)
 # Ruta para obtener la lista de animales
 @libro_bp.route("/libros", methods=["GET"])
 def get_libros():
-    animals = Libro.get_all()
-    return jsonify(render_libro_list(animals))
+    libros = Libro.get_all()
+    return jsonify(render_libro_list(libros))
 
 
 # Ruta para obtener un animal específico por su ID
@@ -36,10 +36,10 @@ def create_libro():
         return jsonify({"error": "Faltan datos requeridos"}), 400
 
     # Crear un nuevo animal y guardarlo en la base de datos
-    animal = Libro(titulo=titulo, autor=autor, edicion=edicion, disponibilidad=disponibilidad)
-    animal.save()
+    libro = Libro(titulo=titulo, autor=autor, edicion=edicion, disponibilidad=disponibilidad)
+    libro.save()
 
-    return jsonify(render_libro_detail(animal)), 201
+    return jsonify(render_libro_detail(libro)), 201
 
 
 # Ruta para actualizar un animal existente
@@ -68,7 +68,7 @@ def delete_libro(id):
     libro = Libro.get_by_id(id)
 
     if not libro:
-        return jsonify({"error": "Animal no encontrado"}), 404
+        return jsonify({"error": "Libro no encontrado"}), 404
 
     # Eliminar el animal de la base de datos
     libro.delete()

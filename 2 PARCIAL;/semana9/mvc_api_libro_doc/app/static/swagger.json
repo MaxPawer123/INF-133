@@ -157,7 +157,7 @@
                         "type": "string"
                     },
                     "disponibilidad": {
-                        "type": "boolean"
+                        "type": "string"
                     }
                 },
                 "required": [
