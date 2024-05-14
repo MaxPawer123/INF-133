@@ -41,3 +41,6 @@ class Libro(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+        
+        
+    ####dasdasdasdasdasd
