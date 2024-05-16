@@ -1,0 +1,6 @@
+werkzeug= es tool en aleman , importar herramientas
+este es la base de frawork
+// solo necesitamos la seguridad
+
+
+
