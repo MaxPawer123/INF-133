@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="subtitle is-2">Editar Animal</h2>
+<form method="post">
+    <div class="field">
+        <label for="titulo">titulo:</label>
+        <div class="control">
+            <input type="text" id="titulo" name="titulo" required class="input" value="{{ libro.titulo }}">
+        </div>
+    </div>
+    <div class="field">
+        <label for="autor">autor:</label>
+        <div class="control">
+            <input type="text" id="autor" name="autor" required class="input" value="{{ libro.autor }}">
+        </div>
+    </div>
+    <div class="field">
+        <label for="edicion">edicion:</label>
+        <div class="control">
+            <input type="text" id="edicion" name="edicion" required class="input" value="{{ libro.edicion }}">
+        </div>
+    </div>
+    
+    <div class="field">
+        <label for="disponibilidad">disponibilidad:</label>
+        <div class="control">
+            <input type="text" id="disponibilidad" name="disponibilidad" required class="input" value="{{ libro.disponibilidad }}">
+        </div>
+    </div>
+    
+    <input type="submit" value="Guardar Cambios" class="button is-primary">
+</form>
+{% endblock %}

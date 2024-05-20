@@ -10,7 +10,7 @@
                 "summary": "Obtiene la lista de todos los libros",
                 "security": [
                     {
-                        "JWTAuth": []
+                        "JWTAuth":[]
                     }
                 ],
                 "responses": {
@@ -33,7 +33,7 @@
                 "summary": "Crea un nuevo libro",
                 "security": [
                     {
-                        "JWTAuth": []
+                        "JWTAuth":[]
                     }
                 ],
                 "requestBody": {
@@ -62,9 +62,9 @@
         "/api/libros/{id}": {
             "get": {
                 "summary": "Obtiene un libro específico por su ID",
-                "security": [
+                "security":[
                     {
-                        "JWTAuth": []
+                        "JWTAuth":[]
                     }
                 ],
                 "parameters": [
@@ -95,9 +95,9 @@
             },
             "put": {
                 "summary": "Actualiza un libro existente por su ID",
-                "security": [
+                "security":[
                     {
-                        "JWTAuth": []
+                        "JWTAuth":[]
                     }
                 ],
                 "parameters": [
@@ -137,9 +137,9 @@
             },
             "delete": {
                 "summary": "Elimina un libro existente por su ID",
-                "security": [
+                "security":[
                     {
-                        "JWTAuth": []
+                        "JWTAuth":[]
                     }
                 ],
                 "parameters": [
@@ -236,10 +236,10 @@
                         "type": "integer",
                         "readOnly": true
                     },
-                    "autor": {
+                    "titulo":{
                         "type": "string"
                     },
-                    "titulo": {
+                    "autor": {
                         "type": "string"
                     },
                     "edicion": {
@@ -250,8 +250,8 @@
                     }
                 },
                 "required": [
-                    "autor",
                     "titulo",
+                    "autor",
                     "edicion",
                     "disponibilidad"
                 ]
@@ -278,7 +278,8 @@
                 },
                 "required": [
                     "username",
-                    "password"
+                    "password",
+                    "roles"
                 ]
             },
             "Login": {

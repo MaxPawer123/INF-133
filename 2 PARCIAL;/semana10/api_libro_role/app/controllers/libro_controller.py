@@ -25,12 +25,12 @@ def get_libro(id):
 @roles_required(roles=["admin"])
 def create_libro():
     data = request.json
-    autor = data.get("autor")
     titulo = data.get("titulo")
+    autor = data.get("autor")
     edicion = data.get("edicion")
     disponibilidad = data.get("disponibilidad")
 
-    if not autor or not titulo or not edicion or not disponibilidad :
+    if not titulo  or not autor or not edicion or not disponibilidad :
         return jsonify({"error": "Faltan datos requeridos"}), 400
 
     libro = Libro(autor=autor, titulo=titulo, edicion=edicion, disponibilidad=disponibilidad)
