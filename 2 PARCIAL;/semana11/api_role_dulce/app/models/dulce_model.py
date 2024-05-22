@@ -4,14 +4,14 @@ from database import db
 # Define la clase `Animal` que hereda de `db.Model`
 # `Animal` representa la tabla `animals` en la base de datos
 class Dulce(db.Model):
-    __tablename__ = "dulce"
+    __tablename__ = "dulces"
 
     # Define las columnas de la tabla `animals`
     id = db.Column(db.Integer, primary_key=True)
     marca = db.Column(db.String(100), nullable=False)
-    peso = db.Column(db.Integer, nullable=False)    
+    peso = db.Column(db.Float, nullable=False)    
     sabor = db.Column(db.String(100), nullable=False)
-    origen = db.Column(db.Double(100), nullable=False)
+    origen = db.Column(db.String(100), nullable=False)
     # Inicializa la clase `Animal`
     def __init__(self, marca, peso, sabor,origen):
         self.marca = marca

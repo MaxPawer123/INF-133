@@ -79,7 +79,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Detalles del animal",
+                        "description": "Detalles del dulce",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -240,7 +240,8 @@
                         "type": "string"
                     },
                     "peso": {
-                        "type": "integer"
+                        "type": "number",
+                        "format":"float"
                     },
                     "sabor": {
                         "type": "string"
@@ -265,7 +266,7 @@
                     "password": {
                         "type": "string"
                     },
-                    "role": {
+                    "roles": {
                         "type": "array",
                         "items": {
                             "type": "string",

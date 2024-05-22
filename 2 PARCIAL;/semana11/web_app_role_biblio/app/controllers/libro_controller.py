@@ -35,7 +35,7 @@ def create_libro():
             libro = Libro(titulo=titulo, autor=autor, edicion=edicion,disponibilidad=disponibilidad)
             libro.save()
             flash("Libro creado exitosamente", "success")
-            return redirect(url_for("animal.list_libros"))
+            return redirect(url_for("libro.list_libros"))
         else:
             return jsonify({"message": "Unauthorized"}), 403
     return libro_view.create_libro()
@@ -57,7 +57,7 @@ def update_libro(id):
             libro = Libro(titulo=titulo, autor=autor, edicion=edicion,disponibilidad=disponibilidad)
 
             flash("Libro actualizado exitosamente", "success")
-            return redirect(url_for("animal.list_animals"))
+            return redirect(url_for("libro.list_libros"))
         else:
             return jsonify({"message": "Unauthorized"}), 403
     return libro_view.update_animal(libro)

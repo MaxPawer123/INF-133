@@ -6,8 +6,8 @@ from flask_login import current_user
 # animales y renderiza el template `animales.html`
 def list_libros(libros):
     return render_template(
-        "animals.html",
-        animals=libros,
+        "libro.html",
+        libros=libros,
         title="Lista de libros",
         current_user=current_user,
     )
