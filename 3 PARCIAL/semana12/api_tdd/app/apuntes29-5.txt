@@ -1,0 +1,22 @@
+Como hacemos los test para una mejor funcionalidad
+para tipos de pruebas 
+pruebas funcionales= Verifican si el software cumple con los requisitos y especificaciones funcionales.
+pruebas no funcionales= Prueban atributos como el rendimiento, la seguridad y la usabilidad del software
+pruebas unitarias: unidades individuales del codigo 
+Pruebas de Sistema: Evalúan el sistema como un todo para garantizar su correcto funcionamiento
+
+// Pruebas de aceptacion: criterios de aceptacion del usuario 
+Pruebas de Carga= mas broquets => nos ayuda a ver si el sistema no falla
+
+Pruebas usabilidad= ayuda la facilidad  de uso de la experiencia 
+QA= son necesarios son para que no saben programar
+PYTEST 
+pruebas de software escrito en python 
+
+
+
+
+
+
+
+
