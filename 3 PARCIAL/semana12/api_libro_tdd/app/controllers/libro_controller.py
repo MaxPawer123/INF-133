@@ -46,7 +46,6 @@ def update_libro(id):
 
     if not libro:
         return jsonify({"error": "Libro no encontrado"}), 404
-
     data = request.json
     autor = data.get("autor")
     titulo = data.get("titulo")

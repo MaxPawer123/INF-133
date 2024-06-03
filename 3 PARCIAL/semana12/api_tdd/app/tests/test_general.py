@@ -1,5 +1,3 @@
-
-
 # se va almacenar el cuerpo de la ruta 
 def test_index(test_client):
     response = test_client.get("/")

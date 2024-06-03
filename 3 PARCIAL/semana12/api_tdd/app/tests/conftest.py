@@ -22,21 +22,20 @@ def test_client():
 
 
 @pytest.fixture(scope="module")
-def auth_headers_admin(): # autorizador de la cabecera es lo que genera el rol=admin
+def admin_auth_headers():
     with app.app_context():
         access_token = create_access_token(
-            identity={"username": "testuser", "roles": '["admin"]'} 
+            identity={"username": "testuser", "roles": '["admin"]'}
         )
         headers = {"Authorization": f"Bearer {access_token}"}
         return headers
 
 
-#se puede crear otro para el rol de user
 @pytest.fixture(scope="module")
-def auth_headers_user(): # autorizador de la cabecera es lo que genera el rol=admin
+def user_auth_headers():
     with app.app_context():
         access_token = create_access_token(
-            identity={"username": "testuser2", "roles": '["user"]'} 
+            identity={"username": "user", "roles": '["user"]'}
         )
         headers = {"Authorization": f"Bearer {access_token}"}
         return headers

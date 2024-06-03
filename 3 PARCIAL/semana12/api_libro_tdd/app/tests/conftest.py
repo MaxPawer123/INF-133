@@ -1,9 +1,7 @@
 import pytest
 from flask_jwt_extended import create_access_token
-
 from app.database import db
 from app.run import app
-
 
 @pytest.fixture(scope="module")
 def test_client():
@@ -19,7 +17,7 @@ def test_client():
 
 
 @pytest.fixture(scope="module")
-def auth_headers():
+def admin_auth_headers():
     with app.app_context():
         access_token = create_access_token(
             identity={"username": "testuser", "roles": '["admin"]'}
@@ -27,11 +25,12 @@ def auth_headers():
         headers = {"Authorization": f"Bearer {access_token}"}
         return headers
 
+
 @pytest.fixture(scope="module")
-def auth_headers2():
+def user_auth_headers():
     with app.app_context():
         access_token = create_access_token(
-            identity={"username": "testuser2", "roles": '["user"]'}
+            identity={"username": "user", "roles": '["user"]'}
         )
         headers = {"Authorization": f"Bearer {access_token}"}
         return headers
