@@ -10,7 +10,7 @@ product_bp = Blueprint("product", __name__)
 # Ruta para obtener la lista de animales
 @product_bp.route("/products", methods=["GET"])
 @jwt_required
-@roles_required(roles=["admin"])
+@roles_required(roles=["admin","user"])
 def get_products():
     products = Product.get_all()
     return jsonify(render_product_list(products))
@@ -19,12 +19,12 @@ def get_products():
 # Ruta para obtener un animal específico por su ID
 @product_bp.route("/products/<int:id>", methods=["GET"])
 @jwt_required
-@roles_required(roles=["admin"])
+@roles_required(roles=["admin","user"])
 def get_product(id):
     product = Product.get_by_id(id)
     if product:
         return jsonify(render_product_detail(product))
-    return jsonify({"error": "Animal no encontrado"}), 404
+    return jsonify({"error": "Producto no encontrado"}), 404
 
 
 # Ruta para crear un nuevo animal
@@ -39,7 +39,7 @@ def create_product():
     stock=data.get("stock")
 
     # Validación simple de datos de entrada
-    if not name or not description or not price or  not stock  is None:
+    if not name or not description or not price or not stock:
         return jsonify({"error": "Faltan datos requeridos"}), 400
 
     # Crear un nuevo animal y guardarlo en la base de datos
@@ -57,7 +57,7 @@ def update_product(id):
     product= Product.get_by_id(id)
 
     if not product:
-        return jsonify({"error": "Products no encontrado"}), 404
+        return jsonify({"error": "Producto no encontrado"}), 404
 
     data = request.json
     name = data.get("name")
@@ -77,9 +77,8 @@ def update_product(id):
 @roles_required(roles=["admin"])
 def delete_product(id):
     product = Product.get_by_id(id)
-
     if not product:
-        return jsonify({"error": "Animal no encontrado"}), 404
+        return jsonify({"error": "producto no encontrado"}), 404
 
     # Eliminar el animal de la base de datos
     product.delete()

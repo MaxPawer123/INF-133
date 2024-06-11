@@ -1,0 +1,13 @@
+/////
+para hacer deboks 
+para que sea una 
+tipos de despliegue --> por eso tiene que pasar la fase de pruebas 
+para hacer las pruebas
+y despliegar una maquina virtual , plataforma como servicio 
+Digital Ocean ----> 
+
+aprender hacer docker -----> es el funturo 
+los que saben hacer infranstructura para  infranstructura
+
+quean clientes para hacer consolas 
+     

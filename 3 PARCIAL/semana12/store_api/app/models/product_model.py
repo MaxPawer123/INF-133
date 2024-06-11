@@ -28,23 +28,23 @@ class Product(db.Model):
     # Obtiene todos los animales de la base de datos
     @staticmethod
     def get_all():
-        return Animal.query.all()
+        return Product.query.all()
 
     # Obtiene un animal por su ID
     @staticmethod
     def get_by_id(id):
-        return Animal.query.get(id)
+        return Product.query.get(id)
 
     # Actualiza un animal en la base de datos
     def update(self, name=None, description =None, price=None ,stock=None ):
         if name is not None:
             self.name = name
         if description is not None:
-            self.species = description
+            self.description = description
         if price is not None:
-            self.age = price
+            self.price = price
         if stock is not None:
-            self.age = stock
+            self.stock = stock
 
         db.session.commit()
 

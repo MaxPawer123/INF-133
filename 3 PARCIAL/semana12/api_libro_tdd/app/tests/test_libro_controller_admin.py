@@ -61,7 +61,7 @@ def test_update_libro(test_client, auth_headers):
 
 
 def test_delete_animal(test_client, admin_auth_headers):
-    # Primero crea un animal
+    # Primero crea un libro
     data = {"autor": "Diana", "titulo": "gatos_blancos", "edicion": "segunda","disponibilidad":"buena"}
     response = test_client.post("/api/animals", json=data, headers=admin_auth_headers)
     assert response.status_code == 201
